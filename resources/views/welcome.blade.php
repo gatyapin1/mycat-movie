@@ -4,27 +4,21 @@
     @if (Auth::check())
         <div class="row">
             <aside class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-header">
-                        <h3 class="card-title">{{ Auth::user()->name }}</h3>
-                    </div>
-                    <div class="card-body">
-                        <img class="rounded img-fluid" src="{{ Gravatar::src(Auth::user()->email, 500) }}" alt="">
-                    </div>
-                </div>
+                @include('users.card', ['user' => Auth::user()])
             </aside>
             <div class="col-md-8">
                 @if (Auth::id() == $user->id)
-                    <div class="text-center">
+                    <div class="text-center mt-5 pt-5">
                         {!! link_to_route('movies.create', '動画の投稿はこちら', [],  ['class' => 'btn btn-primary btn-lg']) !!}
                     </div>
                 @endif
             </div>
         </div>
-
-        <div class="row">
+        
+            <div>
                 @include('movies.movies', ['movies' => $movies])
-        </div>
+                @include('users.likes', ['movies' => $movies])
+            </div>
         
     @else
         <div class="center jumbotron">

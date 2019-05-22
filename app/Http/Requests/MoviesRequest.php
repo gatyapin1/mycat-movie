@@ -24,7 +24,7 @@ class MoviesRequest extends FormRequest
     public function rules()
     {
         return [
-            'movie' => 'required|mimes:mp4,qt,x-ms-wmv,mpeg,x-msvideo|max:3000'
+            'movie' => 'required|mimes:mp4,qt,x-ms-wmv,mpeg,x-msvideo|max:5000'
         ];
     }
 }

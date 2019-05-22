@@ -16,17 +16,24 @@ class MoviesController extends Controller
         $data = [];
         if (\Auth::check()) {
             $user = \Auth::user();
-            $movies = Movie::orderBy('created_at', 'desc')->paginate(10);
-            
+            $movies = Movie::orderBy('created_at', 'desc')->paginate(4);
             $is_movie = false;
             if (Storage::disk('local')->exists('public/mycat_movies/')) {
                 $is_movie = true;
+            }
+            $likes_movies = $user->likes_movies()->orderBy('created_at', 'desc')->paginate(4);
+
+            $likes_exist = false;
+            if (count($likes_movies) > 0) {
+                $likes_exist = True;
             }
             
             $data = [
                 'user' => $user,
                 'movies' => $movies,
                 'is_movie' => $is_movie,
+                'likes_movies' => $likes_movies,
+                'likes_exist' => $likes_exist,
             ];
         }
 
@@ -62,7 +69,7 @@ class MoviesController extends Controller
             'file_name' => $file_name,
         ]);
      
-        return back()->with('success', '新しい動画を登録しました' . $file_path);
+        return back()->with('success', '新しい動画を登録しました' . $file_name);
 
     }
     

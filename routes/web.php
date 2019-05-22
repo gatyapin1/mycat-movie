@@ -23,15 +23,19 @@ Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 // ユーザ機能
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
     Route::resource('movies', 'MoviesController');
-    
-    //いいね機能
+
+    // いいねに係る機能
     Route::post('/movies/{movie}/likes', 'LikesController@store');
     Route::post('/movies/{movie}/likes/{like}', 'LikesController@destroy');
     
-    //削除予定
-    Route::get('images', 'ImagesController@index');
-    Route::post('images', 'ImagesController@store');
-    
+    // フォローに係る機能
+    Route::group(['prefix' => 'users/{id}'], function () {
+        Route::post('follow', 'UserFollowController@store')->name('user.follow');
+        Route::delete('unfollow', 'UserFollowController@destroy')->name('user.unfollow');
+        Route::get('followings', 'UsersController@followings')->name('users.followings');
+        Route::get('followers', 'UsersController@followers')->name('users.followers');
+    });
 });

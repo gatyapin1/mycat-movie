@@ -1,31 +1,17 @@
 <ul class="list-unstyled">
-        <div class=mb-4>
-        <li class="media, row">
-            <h5>動画一覧</h5>
-            @foreach ($movies as $movie)
-            <div class="media-body">
+    <div class="mt-3 border-bottom">
+        <h5>投稿動画一覧</h5>
+    </div>
+    <div class="mb-3 media">
+        <div class="row">
+        @foreach ($movies as $movie)
             @if ($is_movie)
-            <div class="p-2 border-white">
-            <video src="{!!asset('storage/mycat_movies/' . $movie->file_name)!!}" controls width=250 height=200 poster=''></video>
-            <figcaption>{!! link_to_route('movies.show', nl2br(e($movie->title)), ['id' => $movie->id]) !!}</figcaption>
-            </div>
+                <div class="mr-4 border-white">
+                <tr><th><video src="{!!asset('storage/mycat_movies/' . $movie->file_name)!!}" controls width=250 height=200 poster=''></video>
+                <tr><th><figcaption>{!! link_to_route('movies.show', nl2br(e($movie->title)), ['id' => $movie->id]) !!}</figcaption>
+                </div>
             @endif
-                    
-            </div>
-            @endforeach
-        </li>
+        @endforeach
         </div>
-        <div class=mb-4>
-        <li class="media, row">
-            <h5>お気に入り動画一覧</h5>
-            @foreach ($movies as $movie)
-            @endforeach
-        </li>
-        
-        <p class=text-danger>開発中</p>
-        </div>
+    </div>
 </ul>
-
-
-
-{{ $movies->render('pagination::bootstrap-4') }}
