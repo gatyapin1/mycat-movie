@@ -12,12 +12,16 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
     public function counts($user) {
+        $count_my_movies = $user->movies()->count();
         $count_followings = $user->followings()->count();
         $count_followers = $user->followers()->count();
+        $count_likes_movies = $user->likes_movies()->count();
 
         return [
+            'count_my_movies' => $count_my_movies,
             'count_followings' => $count_followings,
             'count_followers' => $count_followers,
+            'count_likes_movies' => $count_likes_movies,
         ];
     }
 }

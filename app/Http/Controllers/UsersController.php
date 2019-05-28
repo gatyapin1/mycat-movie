@@ -21,11 +21,11 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        $movies = $user->movies()->orderBy('created_at', 'desc')->paginate(10);
+        $my_movies = $user->movies()->orderBy('created_at', 'desc')->paginate(10);
         
         $data = [
             'user' => $user,
-            'movies' => $movies,
+            'my_movies' => $my_movies,
         ];
 
         $data += $this->counts($user);

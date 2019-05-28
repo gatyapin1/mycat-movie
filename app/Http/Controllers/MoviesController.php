@@ -16,12 +16,12 @@ class MoviesController extends Controller
         $data = [];
         if (\Auth::check()) {
             $user = \Auth::user();
-            $movies = Movie::orderBy('created_at', 'desc')->paginate(4);
+            $movies = Movie::orderBy('created_at', 'desc')->paginate(8);
             $is_movie = false;
             if (Storage::disk('local')->exists('public/mycat_movies/')) {
                 $is_movie = true;
             }
-            $likes_movies = $user->likes_movies()->orderBy('created_at', 'desc')->paginate(4);
+            $likes_movies = $user->likes_movies()->orderBy('created_at', 'desc')->paginate(8);
 
             $likes_exist = false;
             if (count($likes_movies) > 0) {
@@ -35,6 +35,8 @@ class MoviesController extends Controller
                 'likes_movies' => $likes_movies,
                 'likes_exist' => $likes_exist,
             ];
+            
+            $data += $this->counts($user);
         }
 
         return view('welcome', $data);

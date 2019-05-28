@@ -7,6 +7,7 @@
         </aside>
         <div class="col-sm-8">
             @include('users.navtabs', ['user' => $user])
+            @include('movies.my_movies')
         </div>
     </div>
 @endsection
