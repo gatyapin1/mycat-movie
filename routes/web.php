@@ -27,7 +27,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
     Route::resource('movies', 'MoviesController');
 
-    // いいねに係る機能
+    // 動画へのいいねに係る機能
     Route::post('/movies/{movie}/likes', 'LikesController@store');
     Route::post('/movies/{movie}/likes/{like}', 'LikesController@destroy');
     
@@ -38,4 +38,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('followings', 'UsersController@followings')->name('users.followings');
         Route::get('followers', 'UsersController@followers')->name('users.followers');
     });
+        
+    // 動画へのコメントに係る機能
+    Route::post('/movies/{movie}/comments', 'CommentsController@store');
+    Route::delete('/movies/{movie}/comments/{comment}', 'CommentsController@destroy');
+    
 });

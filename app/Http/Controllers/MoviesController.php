@@ -141,15 +141,18 @@ class MoviesController extends Controller
         
         $movie = Movie::findOrFail($id); // findOrFail 見つからなかった時の例外処理
         $like = $movie->likes()->where('user_id', Auth::user()->id)->first();
+        
+        $user = \Auth::user();
+        $comments = $movie->comments()->orderBy('created_at', 'desc')->paginate(10);
+        
+        $data = [
+            'movie' => $movie,
+            'like' => $like,
+            'user' => $user,
+            'comments' => $comments,
+        ];
 
-        if (\Auth::id() === $movie->user_id) {
-            return view('movies.show', [
-                'movie' => $movie,
-                'like' => $like
-            ]);
-        }
-
-        return view('movies.show')->with(array('movie' => $movie, 'like' => $like));
+        return view('movies.show', $data);
     }
     
 }

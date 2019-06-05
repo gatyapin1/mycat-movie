@@ -46,6 +46,25 @@
                 {!! Form::close() !!}
                 @endif
             </div>
+        </div>
+    </div>
+    
+    <div>
+    <p></p>
+    </div>
+    
+    <div class="row">
+        <div class="col-6">
+            @if (Auth::id() == $user->id)
+                {{ Form::model($movie, array('action' => array('CommentsController@store', $movie->id))) }}
+                    <div class="form-group">
+                        {!! Form::textarea('content', old('content'), ['class' => 'form-control', 'rows' => '2', 'placeholder' => "公開コメントを投稿"]) !!}
+                        {!! Form::submit('コメントを投稿', ['class' => 'btn btn-light']) !!}
+                    </div>
+                {!! Form::close() !!}
+            @endif
+            @include('comments.index', ['user' => Auth::user()]) 
+        </div>
     </div>
     
 @endsection

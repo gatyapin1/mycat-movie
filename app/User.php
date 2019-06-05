@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Movie;
 use App\Like;
+use App\Comment;
 
 class User extends Authenticatable
 {
@@ -95,6 +96,11 @@ class User extends Authenticatable
     public function is_following($userId)
     {
         return $this->followings()->where('follow_id', $userId)->exists();
+    }
+    
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
     }
     
 }

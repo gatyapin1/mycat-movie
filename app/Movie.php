@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 use App\Like;
+use App\Comment;
 
 class Movie extends Model
 {
@@ -17,11 +18,16 @@ class Movie extends Model
     
     public function likes()
     {
-      return $this->hasMany('App\Like');
+        return $this->hasMany('App\Like');
     }
 
     public function like_by()
     {
-      return Like::where('user_id', Auth::user()->id)->first();
+        return Like::where('user_id', Auth::user()->id)->first();
+    }
+    
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
     }
 }
