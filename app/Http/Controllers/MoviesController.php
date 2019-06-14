@@ -71,7 +71,7 @@ class MoviesController extends Controller
             'file_name' => $file_name,
         ]);
      
-        return back()->with('success', '新しい動画を登録しました' . $file_name);
+        return back()->with('success', '新しい動画をアップロードしました' . $file_name);
 
     }
     
@@ -104,7 +104,7 @@ class MoviesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
+        $request->validate([
             'title' => 'required|max:191',
             'detail' => 'required|max:191'
         ]);

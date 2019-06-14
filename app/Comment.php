@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    protected $fillable = ['user_id', 'movie_id', 'content'];
+    protected $fillable = ['movie_id', 'content'];
 
     public function Movie()
     {

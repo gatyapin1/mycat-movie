@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
+@section('title', '動画の編集 - Mycat-Movies')
+
 @section('content')
 
-    <h1>動画編集ページ</h1>
+    <h1>動画の編集</h1>
 
     <div class="row">
         <div class="col-6">

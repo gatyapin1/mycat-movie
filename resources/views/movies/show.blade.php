@@ -37,12 +37,13 @@
                     </div>
                 </div>
             </div>
-            <div class=row>
+            <div class="field mb-2">
                 @if (Auth::id() == $movie->user_id)
-                {!! link_to_route('movies.edit', 'この動画を編集', ['id' => $movie->id], ['class' => 'btn btn-light']) !!}
-        
+                {!! link_to_route('movies.edit', '動画を編集', ['id' => $movie->id], ['class' => 'btn btn-light']) !!}
+            </div>
+            <div>
                 {!! Form::model($movie, ['route' => ['movies.destroy', $movie->id], 'method' => 'delete']) !!}
-                    {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
+                    {!! Form::submit('動画を削除', ['class' => 'btn btn-danger']) !!}
                 {!! Form::close() !!}
                 @endif
             </div>
@@ -58,7 +59,9 @@
             @if (Auth::id() == $user->id)
                 {{ Form::model($movie, array('action' => array('CommentsController@store', $movie->id))) }}
                     <div class="form-group">
-                        {!! Form::textarea('content', old('content'), ['class' => 'form-control', 'rows' => '2', 'placeholder' => "公開コメントを投稿"]) !!}
+                        {!! Form::textarea('content', null, ['class' => 'form-control', 'rows' => '2', 'placeholder' => "公開コメントを記入"]) !!}
+                    </div>
+                    <div class="form-group">
                         {!! Form::submit('コメントを投稿', ['class' => 'btn btn-light']) !!}
                     </div>
                 {!! Form::close() !!}

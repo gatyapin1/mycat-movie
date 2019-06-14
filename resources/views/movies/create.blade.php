@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
+@section('title', 'アップロード - Mycat-Movies')
+
 @section('content')
 
-    <h1>動画投稿ページ</h1>
+    <h1>動画のアップロード</h1>
 
     <div class="row">
         <div class="col-6">
@@ -19,29 +21,20 @@
                 </div>
        
                 <div class="form-group">
-                    {!! Form::file('movie') !!}
+                    {!! Form::file('movie')!!}
                 </div>
- 
-                    {!! Form::submit('投稿', ['class' => 'btn btn-primary btn-block']) !!}
-        
+                
+                <div class="form-group">
+                    {!! Form::submit('アップロードして公開', ['class' => 'btn btn-primary btn-block']) !!}
+                </div>
+                
             {!! Form::close() !!}
         </div>
-        
         
         <div class="col-6">
             @if (session('success'))
             <div class="alert alert-success">
             {{ session('success') }}
-            </div>
-            @endif
-            
-            @if ($errors->any())
-             <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
             </div>
             @endif
         </div>

@@ -9,8 +9,6 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-require('./video');  // 好きなところに行を追加
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -22,3 +20,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 const app = new Vue({
     el: '#app'
 });
+
+require('./mycat-movies');  // 好きなところに行を追加
